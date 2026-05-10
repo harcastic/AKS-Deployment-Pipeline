@@ -21,19 +21,21 @@ jobs:
 
       - name: Build Frontend
         run: | 
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }} ./frontend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:latest -t ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }} ./frontend
 
       - name: Push Frontend
         run: |
-          docker push ${{secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }}
 
 
       - name: Build Backend
         run: |   
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }} ./backend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:latest -t ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }}  ./backend
 
       - name: Push Backend
         run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }} 
 
 
