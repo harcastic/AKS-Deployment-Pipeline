@@ -25,7 +25,7 @@ jobs:
 
       - name: Push Frontend
         run: |
-          docker push ${{secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:latest
+          docker push ${{secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }}
 
 
       - name: Build Backend
@@ -34,7 +34,7 @@ jobs:
 
       - name: Push Backend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:latest 
+          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }} 
 
 
       - name: Triggers Jenkins
