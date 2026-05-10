@@ -82,4 +82,4 @@ A production-grade cloud gallery storage platform built with Next.js, Node.js, E
 
 ## License
 
-MIT
+MIT License
