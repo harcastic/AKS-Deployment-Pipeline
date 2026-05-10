@@ -18,6 +18,14 @@ pipeline {
 
     stages{
 
+        stage('Checkout Code') {
+            steps {
+
+                git branch: 'main',
+                url: 'https://github.com/harcastic/AKS-Deployment-Pipeline.git'
+            }
+        }
+
         stage('Azure Login') {
             steps {
 
@@ -54,6 +62,13 @@ pipeline {
             }
         }
 
+        stage('Apply Kubernetes Manifests') {
+            steps {
+
+                sh ' kubectl apply -f k8s/ '
+            }
+        }
+
         stage('Deploy Frontend') {
             steps {
 
@@ -81,8 +96,22 @@ pipeline {
                 sh ' kubectl rollout status deployment/cloudgallerybackend -n $NAMESPACE '
             }
         }
-    }
 
+        stage('Get Services') {
+            steps {
+
+                sh 'kubectl get svc -n $NAMESPACE '
+            }
+        }
+
+        stage('Get Pods') {
+            steps {
+
+                sh ' kubectl get pods -n $NAMESPACE '
+            }
+        }
+    }
+    
     post {
 
         success {
