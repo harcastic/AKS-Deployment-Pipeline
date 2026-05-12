@@ -3,6 +3,7 @@ pipeline {
     agent any
 
     environment {
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
         NAMESPACE = 'cloudgallery'
     }
 
@@ -136,3 +137,7 @@ pipeline {
         }
     }
 }
+
+
+
+to1ke2nh3ai4
