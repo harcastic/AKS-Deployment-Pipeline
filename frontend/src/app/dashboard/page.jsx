@@ -34,7 +34,7 @@ export default function DashboardPage() {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/images`, {
+      const response = await axios.get('api/images', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -53,7 +53,7 @@ export default function DashboardPage() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {}, {
+      await axios.post('/api/auth/logout', {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -75,7 +75,7 @@ export default function DashboardPage() {
 
     setIsUploading(true);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/images/upload`, formData, {
+      const response = await axios.post('/api/images/upload', formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -95,7 +95,7 @@ export default function DashboardPage() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/images/${id}`, {
+      await axios.delete(`/api/images/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
