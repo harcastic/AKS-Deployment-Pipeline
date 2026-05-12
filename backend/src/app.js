@@ -33,6 +33,12 @@ app.use(cookieParser());
 // Rate limiting
 app.use(globalRateLimiter);
 
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok'
+    });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/images', imageRoutes);

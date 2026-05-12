@@ -1,3 +1,5 @@
+# frontend-deployment.yml
+
 apiVersion: apps/v1
 kind: Deployment
 
@@ -22,7 +24,8 @@ spec:
     spec:
       containers:
       - name: frontend-cont
-        image: harcastic/cloudgalleryfrontend:1
+        image: harcastic/cloudgalleryfrontend:latest
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 3000

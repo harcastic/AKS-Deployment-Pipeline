@@ -42,4 +42,4 @@ jobs:
       - name: Triggers Jenkins
         if: success()
         run: |
-          curl -X POST "http://${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}@135.235.197.78:8080/job/Cloud-Gallery-pipeline/buildWithParameters?IMAGE_TAG=${{ github.run_number }}"
+          curl -X POST "http://${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}@135.235.195.86:8080/job/Cloud-Gallery-pipeline/buildWithParameters?IMAGE_TAG=${{ github.run_number }}"
