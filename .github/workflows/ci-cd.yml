@@ -19,23 +19,31 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
+      - name: Clean Frontend Build Cache
+        run: |
+          rm -rf frontend/.next
+
       - name: Build Frontend
         run: | 
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:latest -t ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }} ./frontend
+          docker build --no-cache \
+          -f frontend/Dockerfile \
+          -t ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }} \
+          ./frontend
 
       - name: Push Frontend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/cloudgalleryfrontend:${{ github.run_number }}
 
 
       - name: Build Backend
         run: |   
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:latest -t ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }}  ./backend
+          docker build --no-cache \
+          -f backend/Dockerfile \
+          -t ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }} \
+          ./backend
 
       - name: Push Backend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/cloudgallerybackend:${{ github.run_number }} 
 
 
